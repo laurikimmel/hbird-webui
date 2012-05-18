@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+	<head>
+    <head>
+        <meta charset=utf-8 />
+        <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+        <META HTTP-EQUIV="EXPIRES" CONTENT="Sat, 26 Jul 1997 05:00:00 GMT">
+        <title>Tree & Chart View</title>
+        <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/dojo/1.7.2/dojo/resources/dojo.css">
+        <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/dojo/1.7.2/dijit/themes/claro/claro.css">
+        <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/dojo/1.7.2/dojo/resources/dnd.css">
+        <style type="text/css">
+            @import "css/default.css";
+
+            #app-layout {
+                width: 100%;
+                height: 100%
+            }
+            #parameters {
+                width: 24em;
+            }
+        </style>
+        <script type="text/javascript">
+            var dojoConfig = {
+                async: true,
+                tlmSiblingOfDojo: false,
+                cacheBust: true,
+                parseOnLoad: false,
+                packages: [
+                    { name: "webui", location: "/js/webui" },
+                    { name: "demo", location: "/js/demo" },
+                ]
+            };
+
+        </script>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/dojo/1.7.2/dojo/dojo.js"></script>
+    </head>
+    <body class="claro">
+        <div id="loader">Loading application</div>
+        <div id="app-layout"></div>
+
+        <script>
+            require([
+                "dojo/domReady!",
+                "dijit/layout/BorderContainer",
+                "dijit/layout/ContentPane",
+                "demo/assembly/TreeViewAssembler",
+                ],
+
+                function(ready, BorderContainer, ContentPane, Assembler) {
+
+                    var borderContainer = new BorderContainer({ design: "sidebar" }, "app-layout");
+
+                    borderContainer.addChild(
+                        new ContentPane({ region: "left", splitter: "true", id: "parameters" })
+                    );
+
+                    borderContainer.addChild(
+                        new ContentPane({ region: "center", splitter: "true", id: "chart" })
+                    );
+
+                    borderContainer.startup();
+
+                    var assembler = new TreeViewAssembler({ name: "Tree & Chart View Assembler" });
+                }
+            );
+        </script>
+    </body>
+</html>

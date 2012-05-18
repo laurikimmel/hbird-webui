@@ -1,0 +1,112 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.hbird</groupId>
+    <artifactId>webserver.websocket</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<path.tools.jar>${java.home}/../lib/tools.jar</path.tools.jar>
+		<version.project>${project.version}</version.project>
+		<version.camel>2.9.2</version.camel>
+		<version.activemq>5.6.0</version.activemq>
+		<version.xbean>3.10</version.xbean>
+		<version.slf4j>1.6.4</version.slf4j>
+		<version.log4j>1.2.16</version.log4j>
+		<version.tools.jar>1.6.0_24</version.tools.jar>
+		<version.gson>1.7.2</version.gson>
+		<version.camel-websocket>2.8</version.camel-websocket>
+	</properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-core</artifactId>
+            <version>${version.camel}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-jms</artifactId>
+            <version>${version.camel}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-spring</artifactId>
+            <version>${version.camel}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.activemq</groupId>
+            <artifactId>activemq-camel</artifactId>
+            <version>${version.activemq}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.xbean</groupId>
+            <artifactId>xbean-spring</artifactId>
+            <version>${version.xbean}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>${version.slf4j}</version>
+        </dependency>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>${version.log4j}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.camel.component</groupId>
+            <artifactId>websocket</artifactId>
+            <version>${version.camel-websocket}</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>${version.gson}</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.hbird.business</groupId>
+            <artifactId>business-configurator</artifactId>
+            <version>${version.project}</version>
+        </dependency>
+    </dependencies>
+
+    <repositories>
+
+        <!-- Repository for Hummingbird dependencies. -->
+        <repository>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <id>Hummingbird</id>
+            <name>Hummingbird</name>
+            <url>http://www.villemos.com:8080/artifactory/repo/</url>
+        </repository>
+
+        <!-- camel-websocket will be part of camel releas 2.10 -->
+        <!-- until then we use this repo -->
+        <repository>
+            <id>kuresson-releases</id>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+                <checksumPolicy>warn</checksumPolicy>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+                <updatePolicy>always</updatePolicy>
+                <checksumPolicy>warn</checksumPolicy>
+            </snapshots>
+            <url>https://raw.github.com/kuresson/camel-websocket/master/releases</url>
+        </repository>
+
+    </repositories>
+
+</project>
