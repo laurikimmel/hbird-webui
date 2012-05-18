@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-	<head>
     <head>
         <meta charset=utf-8 />
         <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
@@ -42,13 +41,12 @@
         <script>
             require([
                 "dojo/domReady!",
-                "dojo/dom",
                 "dijit/layout/BorderContainer",
                 "dijit/layout/ContentPane",
                 "demo/assembly/ChartViewAssemblerOld",
                 ],
 
-                function(ready, dom, BorderContainer, ContentPane, Assembler) {
+                function(ready, BorderContainer, ContentPane, Assembler) {
 
                     var borderContainer = new BorderContainer({ design: "sidebar" }, "app-layout");
 

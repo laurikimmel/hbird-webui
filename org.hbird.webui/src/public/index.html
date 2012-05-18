@@ -1,6 +1,138 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta http-equiv="REFRESH" content="0;url=multi.html">
-	</head>
+    <head>
+        <meta charset=utf-8 />
+        <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+        <META HTTP-EQUIV="EXPIRES" CONTENT="Sat, 26 Jul 1997 05:00:00 GMT">
+        <title>Hummingbird Web UI</title>
+        <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/dojo/1.7.2/dojo/resources/dojo.css">
+        <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/dojo/1.7.2/dojo/resources/dnd.css">
+        <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/dojo/1.7.2/dijit/themes/claro/claro.css">
+        <style type="text/css">
+            @import "css/default.css";
+
+            h1 {
+                margin: 1em;
+            }
+
+            h2, h3, p {
+                margin: 2em;
+            }
+
+            #page-list, #proxy-list {
+                font-size: 1.2em;
+                margin: 3em;
+                padding: 0;
+                list-style-type: none;
+            }
+
+            #page-list li, #proxy-list li {
+                margin: 0 0 .2em 0;
+                display: block;
+                color: #000000;
+                background-color: #ffffff;
+                padding: .2em .8em;
+                text-decoration: none;
+            }
+
+            #proxy-list li {
+                display: inline;
+                margin: .2em;
+            }
+
+            #page-list li:hover, #proxy-list li:hover {
+                background-color: #369;
+                color: #FFF;
+            }
+
+            .active {
+                border: 1px dashed #369;
+            }
+
+        </style>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/dojo/1.7.2/dojo/dojo.js"></script>
+        <script type="text/javascript">
+            var dojoConfig = {
+                async: true,
+                tlmSiblingOfDojo: false,
+                cacheBust: true,
+                parseOnLoad: false,
+                packages: [
+                    { name: "webui", location: "/js/webui" },
+                    { name: "demo", location: "/js/demo" },
+                ]
+            };
+
+            var proxies = [
+                { id: "ws", name: "Web Socket Proxy", description: "Web socket proxy for delivering live data from Hummingbird system." },
+                { id: "mock", name: "Mock Proxy", description: "Local mock proxy producing lots of random values for testing." },
+                { id: "cometd", name: "Cometd Proxy", description: "Cometd proxy. Not functional! Broken in dojo 1.7.2 with AMD." },
+            ];
+
+            var pages = [
+                { url: "chart.html", name: "Dnd list and dynamic chart for parameters" },
+                { url: "components.html", name: "System components view" },
+                { url: "log.html", name: "Log View" },
+                { url: "map.html", name: "Map View" },
+                { url: "multi.html", name: "Multiple views on same page" },
+                { url: "parameters.html", name: "Parameters view" },
+                { url: "tree-chart.html", name: "Dnd tree and dynamic chart for parameters" },
+            ];
+
+            var activeProxy = proxies[0].id;
+
+            require([
+                "dojo/domReady!",
+                "dojo/dom",
+                "dojo/_base/array",
+                "dojo/dom-construct",
+                "dojo/on",
+                "dojo/dom-class",
+                ],
+
+                function(ready, dom, Arrays, domConstruct, on, domClass) {
+                    var pageList = dom.byId("page-list");
+                    Arrays.forEach(pages, function(page) {
+                        var item = domConstruct.create("li", { innerHTML: page.name, }, pageList);
+                        on(item, "click", dojo.hitch(page, function(event) {
+                            window.open(this.url + "?proxy=" + activeProxy, "_blank");
+                        }));
+                    });
+                    var proxyList = dom.byId("proxy-list");
+                    Arrays.forEach(proxies, function(proxy, index) {
+                        var item = domConstruct.create("li", {
+                            innerHTML: proxy.name,
+                            id: proxy.id,
+                            title: proxy.description
+                        }, proxyList);
+
+                        if (index == 0) {
+                            domClass.add(item, "active");
+                        }
+                        on(item, "click", dojo.hitch(proxy, function(event) {
+                            activeProxy = proxy.id;
+                            dojo.query("#proxy-list li").forEach(function(node, index, nodelist) {
+                                if (node.id == proxy.id) {
+                                    domClass.add(node, "active");
+                                } else {
+                                    domClass.remove(node, "active");
+                                }
+                            });
+                        }));
+                    });
+                }
+            );
+
+        </script>
+    </head>
+    <body>
+        <h1>Hummingbird Web UI</h1>
+        <h2>Introduction</h2>
+        <p>TODO</p>
+        <h2>Demo assemblies</h2>
+        <h3>Select proxy</h3>
+        <ul id="proxy-list"></ul>
+        <h3>Select page</h3>
+        <ul id="page-list"></ul>
+    </body>
 </html>
