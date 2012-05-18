@@ -6,19 +6,20 @@
     <artifactId>webserver.websocket</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<path.tools.jar>${java.home}/../lib/tools.jar</path.tools.jar>
-		<version.project>${project.version}</version.project>
-		<version.camel>2.9.2</version.camel>
-		<version.activemq>5.6.0</version.activemq>
-		<version.xbean>3.10</version.xbean>
-		<version.slf4j>1.6.4</version.slf4j>
-		<version.log4j>1.2.16</version.log4j>
-		<version.tools.jar>1.6.0_24</version.tools.jar>
-		<version.gson>1.7.2</version.gson>
-		<version.camel-websocket>2.8</version.camel-websocket>
-	</properties>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <path.tools.jar>${java.home}/../lib/tools.jar</path.tools.jar>
+        <version.project>${project.version}</version.project>
+        <version.camel>2.9.2</version.camel>
+        <version.activemq>5.6.0</version.activemq>
+        <version.xbean>3.10</version.xbean>
+        <version.slf4j>1.6.4</version.slf4j>
+        <version.log4j>1.2.16</version.log4j>
+        <version.tools.jar>1.6.0_24</version.tools.jar>
+        <version.gson>1.7.2</version.gson>
+        <version.camel-websocket>2.8</version.camel-websocket>
+        <version.exec.maven.plugin>1.2.1</version.exec.maven.plugin>
+    </properties>
 
     <dependencies>
         <dependency>
@@ -109,4 +110,24 @@
 
     </repositories>
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>${version.exec.maven.plugin}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>java</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <mainClass>org.hbird.webserver.websocket.WebServer</mainClass>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+    
 </project>
