@@ -3,12 +3,13 @@ define(
      "dojox/grid/DataGrid",
      "dojox/uuid/Uuid",
      "dojox/uuid/generateRandomUuid",
+     "dijit/registry",
      "../common/Constants",
      "../common/Utils",
      "./ViewBase",
     ],
 
-    function(declare, DataGrid, Uuid, generateRandomUuid,  Constants, Utils, ViewBase) {
+    function(declare, DataGrid, Uuid, generateRandomUuid, registry, Constants, Utils, ViewBase) {
 
         var counter = 0;
 
@@ -67,7 +68,7 @@ define(
                             ],
                     });
 
-                    var container = dijit.byId(this.parentDivId);
+                    var container = registry.byId(this.parentDivId);
                     container.addChild(grid);
                     grid.startup();
 

@@ -3,6 +3,7 @@ define([
     "dojox/grid/DataGrid",
     "dojo/data/ObjectStore",
     "dojo/aspect",
+    "dijit/registry",
     "../common/Constants",
     "../common/Utils",
     "./ViewBase",
@@ -10,7 +11,7 @@ define([
 
     /* Not working with dojo 1.7.2 - table refresh is broken. */
 
-    function(declare, DataGrid, ObjectStore, aspect, Constants, Utils, ViewBase) {
+    function(declare, DataGrid, ObjectStore, aspect, registry, Constants, Utils, ViewBase) {
 
         // XXX - hack for Observable not working in dojo 1.7.2
         var addFlag = false;
@@ -67,7 +68,7 @@ define([
                         }
                     });
 
-                    var container = dijit.byId(this.parentDivId);
+                    var container = registry.byId(this.parentDivId);
                     container.addChild(grid);
                     grid.startup();
 

@@ -10,6 +10,8 @@ define([
     ],
 
     function(declare, Map, GfxLayer, GeometryFeature, Point, Constants, Utils, ViewBase) {
+	
+	// FIXME - Map not visible in 1.8.0 =(
 
         return [
 

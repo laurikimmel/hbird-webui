@@ -42,7 +42,7 @@ define([
                 },
 
                 postBuild: function() {
-                    var loader = dom.byId(this.loaderDivId);
+                	var loader = dom.byId(this.loaderDivId);
                     if (loader != null) {
                         loader.innerHTML = "Done!";
                         setTimeout(dojo.hitch(this, function() {

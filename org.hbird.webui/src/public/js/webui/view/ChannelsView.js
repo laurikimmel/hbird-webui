@@ -3,13 +3,14 @@ define([
     "dojox/grid/DataGrid",
     "dojo/date/locale",
     "dojo/aspect",
+    "dijit/registry",
     "../common/Constants",
     "../common/Utils",
     "../net/ProxyBase",
     "./ViewBase",
     ],
 
-    function(declare, DataGrid, locale, aspect, Constants, Utils, ProxyBase, ViewBase) {
+    function(declare, DataGrid, locale, aspect, registry, Constants, Utils, ProxyBase, ViewBase) {
 
         function toString(statusMessage) {
             return statusMessage == null ? "" : statusMessage;
@@ -146,7 +147,7 @@ define([
                             ],
                     });
 
-                    var container = dijit.byId(this.parentDivId);
+                    var container = registry.byId(this.parentDivId);
                     container.addChild(grid);
                     grid.startup();
 

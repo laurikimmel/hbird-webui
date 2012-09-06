@@ -11,6 +11,7 @@ define(
      "dojox/charting/axis2d/Default",
      "dojox/charting/action2d/Tooltip",
      "dojox/charting/action2d/Magnify",
+     "dijit/registry",
      "../common/Constants",
      "../common/Utils",
      "./ParameterViewBase",
@@ -18,7 +19,7 @@ define(
 
     /* Not working 'cos unable to remove old items from store =( */
 
-    function(declare, domConstruct, Observable, StoreSeries, Chart, Legend, Theme, Lines, Default, Tooltip, Magnify, Constants, Utils, ViewBase) {
+    function(declare, domConstruct, Observable, StoreSeries, Chart, Legend, Theme, Lines, Default, Tooltip, Magnify, registry, Constants, Utils, ViewBase) {
 
         function isNumericParameter(parameter) {
             return Utils.isNumber(parameter.value);
@@ -101,7 +102,7 @@ define(
                     chart.addAxis("y", { vertical: true });
                     chart.resize(800, 400);
 */
-                    var dim = dijit.byId(this.divId)._contentBox;
+                    var dim = registry.byId(this.divId)._contentBox;
                     chart.resize(dim.w, dim.h - 30);
 
                     new Tooltip(chart, "default");

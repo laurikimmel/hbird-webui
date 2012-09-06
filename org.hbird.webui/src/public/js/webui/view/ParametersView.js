@@ -2,12 +2,13 @@ define([
     "dojo/_base/declare",
     "dojox/grid/DataGrid",
     "dojo/date/locale",
+    "dijit/registry",
     "../common/Constants",
     "../common/Utils",
     "./ViewBase",
     ],
 
-    function(declare, DataGrid, locale, Constants, Utils, ViewBase) {
+    function(declare, DataGrid, locale, registry, Constants, Utils, ViewBase) {
 
         return [
             declare("ParametersController", Controller, {
@@ -64,7 +65,7 @@ define([
                             ],
                     });
 
-                    var container = dijit.byId(this.parentDivId);
+                    var container = registry.byId(this.parentDivId);
                     container.addChild(grid);
                     grid.startup();
 
