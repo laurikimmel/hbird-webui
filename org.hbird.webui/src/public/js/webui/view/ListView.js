@@ -2,13 +2,12 @@ define(
     ["dojo/_base/declare",
      "dojo/dom-construct",
      "dojo/dnd/Source",
-     "dojo/store/Observable",
      "../common/Constants",
      "../common/Utils",
      "./ViewBase",
     ],
 
-    function(declare, domConstruct, Source, Observable, Constants, Utils, ViewBase) {
+    function(declare, domConstruct, Source, Constants, Utils, ViewBase) {
 
         return [
 
@@ -38,8 +37,6 @@ define(
                 constructor: function(args) {
                     declare.safeMixin(this, args);
                     
-                    store = new Observable(this.store);
-
                     if (this.dndSource == null) {
                         this.dndSource = new dojo.dnd.Source(this.divId, {
                             copyOnly: true,
@@ -47,9 +44,8 @@ define(
                         });
                     }
 
-                    var all = store.query();
+                    var all = this.store.query();
 
-                    // BROKEN in 1.8.0 - http://bugs.dojotoolkit.org/ticket/15928
                     all.observe(dojo.hitch(this, this.dataUpdateHandler), true); // true to listen objects property changes
 
                     if (this.selectionTopic != null) {

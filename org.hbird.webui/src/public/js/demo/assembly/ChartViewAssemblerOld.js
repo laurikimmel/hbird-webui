@@ -1,6 +1,7 @@
 define([
     "dojo/_base/declare",
     "dojo/store/Memory",
+    "dojo/store/Observable",
     "webui/common/Constants",
     "webui/common/Utils",
     "webui/assembly/AssemblerBase",
@@ -8,7 +9,7 @@ define([
     "webui/view/ParameterChartViewOld",
     ],
 
-    function(declare, Memory, Constants, Utils, base, list, chart) {
+    function(declare, Memory, Observable, Constants, Utils, base, list, chart) {
         return [
 
             declare("ChartViewAssemblerOld", AssemblerBase, {
@@ -34,7 +35,7 @@ define([
                 },
 
                 setupList: function() {
-                    var store = new Memory({ idProperty: "storeId" });
+                    var store = new Observable(new Memory({ idProperty: "storeId" }));
                     var view = new ListView({
                         store: store,
                         divId: "parameters",
