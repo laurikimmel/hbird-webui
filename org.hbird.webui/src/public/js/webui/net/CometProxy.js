@@ -1,6 +1,7 @@
 define([
     "dojo/_base/declare",
-    "dojox/cometd/_base",
+//    "dojox/cometd/_base",
+    "dojox/cometd",
     "../common/Constants",
     "./ProxyBase",
     ],

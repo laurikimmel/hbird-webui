@@ -1,13 +1,15 @@
 define(
     ["dojo/_base/declare",
      "dojo/store/Memory",
+     "dojo/store/Observable",
      "webui/common/Constants",
+     "webui/common/Utils",
      "webui/assembly/AssemblerBase",
      "webui/view/ListView",
      "webui/view/ParameterChartView",
      ],
 
-    function(declare, Memory, Constants, base, list, chart) {
+    function(declare, Memory, Observable, Constants, Utils, base, list, chart) {
         return [
 
             declare("ChartViewAssembler", AssemblerBase, {
@@ -36,17 +38,27 @@ define(
                 },
 
                 setupList: function() {
-                    var store = new Memory({ idProperty: "name" });
+                    var store = new Observable(new Memory({ idProperty: "storeId" }));
                     var view = new ListView({
                         store: store,
                         divId: "parameters",
                         dndTypes: [Constants.DND_TYPE_PARAMETER],
                         selectionTopic: Constants.TOPIC_SELECTION_PARAMETER,
+                        labelFormatter: function(parameter) {
+                            return parameter.issuedBy + " - " + parameter.name;
+                        },
+                        titleFormatter: function(parameter) {
+                            return parameter.description + "\n" + parameter.issuedBy + " - " + parameter.name;
+                        }
                     });
                     var controller = new ListController({
                         store: store,
                         id: "Parameters List Controller",
                         channels: ["/parameters"],
+                        beforeInsert: function(message) {
+                            message.storeId = Utils.getParameterId(message);
+                            return message;
+                        },
                     });
                 },
 

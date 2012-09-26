@@ -10,12 +10,13 @@ define([
     "dojox/charting/axis2d/Default",
     "dojox/charting/action2d/Tooltip",
     "dojox/charting/action2d/Magnify",
+    "dijit/registry",
     "../common/Constants",
     "../common/Utils",
     "./ParameterViewBase",
     ],
 
-    function(declare, Arrays, domConstruct, Chart, Legend, Theme, Lines, Default, Tooltip, Magnify, Constants, Utils, ViewBase) {
+    function(declare, Arrays, domConstruct, Chart, Legend, Theme, Lines, Default, Tooltip, Magnify, registry, Constants, Utils, ViewBase) {
 
         function isNumericParameter(parameter) {
             return Utils.isNumber(parameter.value);
@@ -92,7 +93,7 @@ define([
                         this.chart.removeSeries(Utils.getParameterId(parameter));
                     });
 
-                    var div = dijit.byId("chart");
+                    var div = registry.byId("chart");
                     dojo.connect(div, "resize", this, this.rezise);
 
                     return chartWidget;
@@ -100,7 +101,7 @@ define([
 
                 resize: function() {
                     console.log("*** resize *** " + this.divId + "; " + this.chart);
-                    var dim = dijit.byId(this.divId)._contentBox;
+                    var dim = registry.byId(this.divId)._contentBox;
                     this.chart.resize(dim.w, dim.h - 30);
                 },
 
