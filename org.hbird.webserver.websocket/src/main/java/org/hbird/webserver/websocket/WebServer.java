@@ -19,7 +19,7 @@ public class WebServer extends RouteBuilder {
 
     private static final Logger LOG = LoggerFactory.getLogger(WebServer.class);
 
-    private int heartBeatInterval = 3000;
+    private final int heartBeatInterval = 3000;
 
     @Value("${component.name}")
     private String componentName; // WebServer
@@ -36,10 +36,10 @@ public class WebServer extends RouteBuilder {
     private ToJsonProcessor toJson;
 
     // @Autowired - can't auto wire two different objects of same type =(
-    private NamedCache parameterCache = new NamedCache();
+    private final NamedCache parameterCache = new NamedCache();
 
     // @Autowired - can't auto wire two different objects of same type =(
-    private NamedCache systemCache = new NamedCache();
+    private final NamedCache systemCache = new NamedCache();
 
     /** @{inheritDoc}. */
     @Override
