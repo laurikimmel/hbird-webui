@@ -13,7 +13,6 @@ define([
         return [
             declare("ParametersController", Controller, {
                 channelHandler: function(message, channel) {
-//                    console.log("[ParametersController] channel: " + channel + "; message: " + message);
                     var parameterId = Utils.getParameterId(message);
                     this.store.fetchItemByIdentity({
                         scope: this,
@@ -31,12 +30,12 @@ define([
                                     datasetidentifier: message.datasetidentifier,
                                 });
                             } else {
-                                this.store.setValue(item, "value", message.value);
-                                this.store.setValue(item, "timestamp", message.timestamp);
-                                this.store.setValue(item, "issuedBy", message.issuedBy);
-                                this.store.setValue(item, "unit", message.unit);
-                                this.store.setValue(item, "description", message.description);
-                                this.store.setValue(item, "datasetidentifier", message.datasetidentifier);
+                                this.store.setValue(item, "value", Utils.normalizeForStorage(message.value));
+                                this.store.setValue(item, "timestamp", Utils.normalizeForStorage(message.timestamp));
+                                this.store.setValue(item, "issuedBy", Utils.normalizeForStorage(message.issuedBy));
+                                this.store.setValue(item, "unit", Utils.normalizeForStorage(message.unit));
+                                this.store.setValue(item, "description", Utils.normalizeForStorage(message.description));
+                                this.store.setValue(item, "datasetidentifier", Utils.normalizeForStorage(message.datasetidentifier));
                             }
                         }
                     });

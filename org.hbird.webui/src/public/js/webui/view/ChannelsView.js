@@ -12,10 +12,6 @@ define([
 
     function(declare, DataGrid, locale, aspect, registry, Constants, Utils, ProxyBase, ViewBase) {
 
-        function toString(statusMessage) {
-            return statusMessage == null ? "" : statusMessage;
-        }
-
         return [
             declare("ChannelsController", [ProxyBase, Controller], {
 
@@ -47,9 +43,9 @@ define([
                                     });
                                 } else {
                                     this.store.setValue(item, "timestamp", new Date().getTime());
-                                    this.store.setValue(item, "status", status);
-                                    this.store.setValue(item, "statusMessage", toString(statusMessage));
-                                    this.store.setValue(item, "source", source);
+                                    this.store.setValue(item, "status", Utils.normalizeForStorage(status));
+                                    this.store.setValue(item, "statusMessage", Utils.normalizeForStorage(statusMessage));
+                                    this.store.setValue(item, "source", Utils.normalizeForStorage(source));
                                 }
                             },
                             onError: function(er) {

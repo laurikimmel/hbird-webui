@@ -43,10 +43,10 @@ define([
                                     status: getStatus(message, now),
                                 });
                             } else {
-                                this.store.setValue(item, "timestamp", message.timestamp);
-                                this.store.setValue(item, "issuedBy", message.issuedBy);
-                                this.store.setValue(item, "description", message.description);
-                                this.store.setValue(item, "nextBeat", message.nextBeat);
+                                this.store.setValue(item, "timestamp", Utils.normalizeForStorage(message.timestamp));
+                                this.store.setValue(item, "issuedBy", Utils.normalizeForStorage(message.issuedBy));
+                                this.store.setValue(item, "description", Utils.normalizeForStorage(message.description));
+                                this.store.setValue(item, "nextBeat", Utils.normalizeForStorage(message.nextBeat));
                                 this.store.setValue(item, "status", getStatus(item, now));
                             }
                         }

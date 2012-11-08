@@ -65,7 +65,17 @@ define(["dojo/_base/declare",
              * Returns unique id for given parameter
              */
             getParameterId: function(parameter) {
-                return parameter.issuedBy + "/" + parameter.name;
+                return parameter.datasetidentifier + "/" + parameter.name;
+            },
+
+            /**
+             * Returns normalized value for storage.
+             *
+             * Storages are not accepting null values.
+             * In case value is null returns empty string.
+             */
+            normalizeForStorage: function(value) {
+                return value == null ? "" : value;
             },
 
         };
